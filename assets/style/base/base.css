@@ -1,13 +1,14 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html {}
+html {
+}
 
 body {
-    margin: 0;
-    color: var(--gray3);
-    font-size: 1.2rem;
+  margin: 0;
+  color: var(--gray3);
+  font-size: 1.2rem;
 }
 
 h1,
@@ -16,30 +17,29 @@ h3,
 h4,
 h5,
 h6 {
-    margin: .5em 0 .5em;
-    font-family: 'Edu VIC WA NT Beginner', cursive;
+  margin: 0.5em 0 0.5em;
+  font-family: "Edu VIC WA NT Beginner", cursive;
 }
 
 p {
-    margin: 0 0 1em;
+  margin: 0 0 1em;
 }
 
 a {
-    text-decoration: none;
-    color: unset;
+  text-decoration: none;
+  color: unset;
+  font-family: "Edu VIC WA NT Beginner", cursive;
 }
-
-
 
 /* Dont stretch my Media */
 img,
 embed,
 video,
 object {
-    max-width: 100%
+  max-width: 100%;
 }
 
 /* Simple and useful CSS Debugging Technique */
 .debug * {
-    outline: 1px solid red
+  outline: 1px solid red;
 }
