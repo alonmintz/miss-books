@@ -29,22 +29,22 @@ function query(filterBy = {}) {
         books = books.filter((book) => regExp.test(book.title));
       }
       if (filterBy.pageCount) {
-        books = books.filter((book) => book.pageCount <= filterBy.pageCount);
+        books = books.filter((book) => book.pageCount >= filterBy.pageCount);
       }
       if (filterBy.publishedDate) {
         books = books.filter(
-          (book) => book.publishedDate <= filterBy.publishedDate
+          (book) => book.publishedDate >= filterBy.publishedDate
         );
       }
       if (filterBy.amount) {
         books = books.filter(
-          (book) => book.listPrice?.amount <= filterBy.amount
+          (book) => book.listPrice && book.listPrice.amount >= filterBy.amount
         );
       }
       if (filterBy.currencyCode) {
         const regExp = new RegExp(filterBy.currencyCode, "i");
-        books = books.filter((book) =>
-          regExp.test(book.listPrice?.currencyCode)
+        books = books.filter(
+          (book) => book.listPrice && regExp.test(book.listPrice.currencyCode)
         );
       }
       return books;
