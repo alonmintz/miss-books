@@ -1,3 +1,4 @@
+import { BookDetails } from "./cmps/BookDetails.jsx";
 import { BookEdit } from "./cmps/BookEdit.jsx";
 import { AppHeader } from "./cmps/layout/AppHeader.jsx";
 import { AboutUs } from "./pages/AboutUs.jsx";
@@ -17,6 +18,7 @@ export function App() {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/book" element={<BookIndex />}>
+              <Route path="/book/:bookId" element={<BookDetails />}></Route>
               <Route path="/book/edit" element={<BookEdit />} />
               <Route path="/book/edit/:bookId" element={<BookEdit />} />
             </Route>

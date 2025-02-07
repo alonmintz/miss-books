@@ -18,6 +18,8 @@
 /* Components */
 @import "cmps/app-header.css";
 @import "cmps/modal.css";
+@import "cmps/book-list.css";
+@import "cmps/book-preview.css";
 /* @import "cmps/car-filter.css";
 @import "cmps/car-list.css";
 @import "cmps/car-preview.css";

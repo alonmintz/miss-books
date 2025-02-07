@@ -20,13 +20,24 @@ export function BookIndex() {
       .catch((err) => console.log("Error loading books: ", err));
   }
 
-  if (!books) return <div className="loader">Loading...</div>;
+  function removeBook(bookId) {
+    bookService
+      .remove(bookId)
+      .then(() => {
+        setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
+      })
+      .catch((err) => {
+        console.log(`Error removing ${bookId}: `, err);
+      });
+  }
+
+  if (!books) return <h1 className="loader">Loading...</h1>;
   return (
     <section className="book-index flex flex-column">
       <BookFilter />
       <Link to="/book/edit"> ADD </Link>
       <Outlet />
-      <BookList books={books} />
+      <BookList books={books} onRemoveBook={removeBook} />
       book index
     </section>
   );
