@@ -1,7 +1,7 @@
 import { bookService } from "../services/book.service.js";
 
 const { useState, useEffect } = React;
-const { useNavigate, useParams, Link } = ReactRouterDOM;
+const { useNavigate, useParams } = ReactRouterDOM;
 
 export function BookDetails() {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ export function BookDetails() {
   function onClose() {
     navigate("/book");
   }
+
   function evStop(ev) {
     ev.stopPropagation();
   }

@@ -3,16 +3,21 @@ import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
 
 const { useState, useEffect } = React;
-const { Link, Outlet } = ReactRouterDOM;
+const { Link, Outlet, useLocation } = ReactRouterDOM;
 
 export function BookIndex() {
   const [books, setBooks] = useState(null);
   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 
+  //   const location = useLocation();
+
   useEffect(() => {
-    console.log("filterBy from index: ", filterBy);
     loadBooks();
   }, [filterBy]);
+
+  //   useEffect(() => {
+  //     loadBooks();
+  //   }, [location]);
 
   function loadBooks() {
     bookService
@@ -42,7 +47,11 @@ export function BookIndex() {
       <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
       <Link to="/book/edit"> ADD </Link>
       <Outlet />
-      <BookList books={books} onRemoveBook={removeBook} />
+      {books.length === 0 ? (
+        <h1>Sorry but none of the books match...</h1>
+      ) : (
+        <BookList books={books} onRemoveBook={removeBook} />
+      )}
     </section>
   );
 }

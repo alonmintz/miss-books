@@ -68,6 +68,7 @@ function save(book) {
   if (book.id) {
     return storageService.put(STORAGE_KEY, book);
   }
+  //TODO: add function (populateNewBook()) that injects fields to a new book (like subtitle etc...)
   return storageService.post(STORAGE_KEY, book);
 }
 
@@ -104,8 +105,6 @@ function getCurrencyCodes() {
 }
 
 function _setNextPrevId(book) {
-  console.log("gFilterBy:", gFilterBy);
-
   return query(gFilterBy).then((books) => {
     const bookIdx = books.findIndex((currBook) => currBook.id === book.id);
     const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0];
@@ -124,5 +123,7 @@ function _createBooks() {
     saveToStorage(STORAGE_KEY, demoBooks);
   }
 }
+
+function _populateNewBook(book) {}
 
 function _createBook() {}

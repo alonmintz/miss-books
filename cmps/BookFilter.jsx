@@ -6,7 +6,6 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy);
 
   useEffect(() => {
-    console.log("filterBy from BookFilter: ", filterByToEdit);
     onSetFilterBy(filterByToEdit);
   }, [filterByToEdit]);
 
@@ -52,6 +51,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
           id="publishedDate"
           name="publishedDate"
           type="number"
+          min={0}
           value={filterByToEdit.publishedDate || ""}
           onChange={handleChange}
         />
