@@ -9,11 +9,13 @@ export const bookService = {
   save,
   getEmptyBook,
   getDefaultFilter,
+  getCurrencyCodes,
 };
 
 const STORAGE_KEY = "bookDB";
 
 const ctgs = ["Love", "Fiction", "Poetry", "Computers", "Religion"];
+const currencyCodes = ["ILS", "USD", "EUR"];
 
 let gFilterBy = {};
 
@@ -97,7 +99,13 @@ function getDefaultFilter() {
   };
 }
 
+function getCurrencyCodes() {
+  return currencyCodes;
+}
+
 function _setNextPrevId(book) {
+  console.log("gFilterBy:", gFilterBy);
+
   return query(gFilterBy).then((books) => {
     const bookIdx = books.findIndex((currBook) => currBook.id === book.id);
     const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0];

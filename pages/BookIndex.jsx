@@ -10,6 +10,7 @@ export function BookIndex() {
   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
 
   useEffect(() => {
+    console.log("filterBy from index: ", filterBy);
     loadBooks();
   }, [filterBy]);
 
@@ -31,14 +32,17 @@ export function BookIndex() {
       });
   }
 
+  function onSetFilterBy(editedFilterBy) {
+    setFilterBy((prevFilterBy) => ({ ...prevFilterBy, ...editedFilterBy }));
+  }
+
   if (!books) return <h1 className="loader">Loading...</h1>;
   return (
     <section className="book-index flex flex-column">
-      <BookFilter />
+      <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
       <Link to="/book/edit"> ADD </Link>
       <Outlet />
       <BookList books={books} onRemoveBook={removeBook} />
-      book index
     </section>
   );
 }

@@ -13,5 +13,12 @@
   justify-content: space-around;
   align-items: center;
   background-color: var(--clr1bg);
+  border-radius: 10px;
   padding: 0.4rem;
+  transition: transform 0.5s;
+}
+
+.book-list li:hover {
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.01);
 }

@@ -30,6 +30,16 @@ export function BookDetails() {
     ev.stopPropagation();
   }
 
+  const getAuthors = () => {
+    if (!book) return;
+    return book.authors.join(", ");
+  };
+
+  const getCategories = () => {
+    if (!book) return;
+    return book.categories.join(", ");
+  };
+
   if (!book)
     return (
       <section className="modal-backdrop" onClick={onClose}>
@@ -44,27 +54,35 @@ export function BookDetails() {
         <button className="close-btn" onClick={onClose}>
           X
         </button>
-        <h1>{book.title}</h1>
-        {book.authors.map((author) => (
-          <h4 key="author">{author}</h4>
-        ))}
-        <img src={book.thumbnail} alt="" />
+        <h1>{`${book.title} - ${getAuthors()}`}</h1>
         <h4>{book.subtitle}</h4>
-        <section
-          className="flex"
-          style={{ width: "100%", justifyContent: "space-between" }}
-        >
-          <button>
-            <Link to={`/book/${book.prevBookId}`}>
-              <i className="fa fa-arrow-left"></i>
-            </Link>
-          </button>
-          <button>
-            <Link to={`/book/${book.nextBookId}`}>
-              <i className="fa fa-arrow-right"></i>
-            </Link>
-          </button>
+        <section className="details">
+          <img src={book.thumbnail} alt="" />
+          <h4 className="grid-detail price">
+            Price: {book.listPrice.amount} {book.listPrice.currencyCode}
+          </h4>
+          <h4 className="grid-detail lng">Language: {book.language}</h4>
+          <h4 className="grid-detail ctgs">Categories: {getCategories()}</h4>
+          <h4 className="grid-detail year">
+            Publish Year: {book.publishedDate}
+          </h4>
+          <h4 className="grid-detail page-count">
+            Page Count: {book.pageCount}
+          </h4>
         </section>
+        <p className="book-desc">{book.description}</p>
+        <button
+          className="prev-btn"
+          onClick={() => navigate(`/book/${book.prevBookId}`)}
+        >
+          <i className="fa fa-arrow-left"></i>
+        </button>
+        <button
+          className="next-btn"
+          onClick={() => navigate(`/book/${book.nextBookId}`)}
+        >
+          <i className="fa fa-arrow-right"></i>
+        </button>
       </section>
     </section>
   );
