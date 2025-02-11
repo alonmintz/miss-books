@@ -1,0 +1,46 @@
+.book-filter {
+  font-family: "Edu VIC WA NT Beginner", cursive;
+  font-size: 0.7em;
+  height: auto;
+  padding: 20px;
+  margin-block-start: 10px;
+  background-color: var(--clr2bg-light);
+  border: 1px solid var(--clr1);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  option {
+    font-family: "Edu VIC WA NT Beginner", cursive;
+  }
+}
+
+legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  margin-right: 10px;
+  flex: 1;
+}
+
+.filter-item:last-child {
+  margin-right: 0;
+}

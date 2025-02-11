@@ -88,6 +88,3 @@ export function BookDetails() {
     </section>
   );
 }
-
-//TODO: why sometimes the first button click doesn't work??
-//TODO: keep the modal size one, avoid the content from glitching away

@@ -15,7 +15,6 @@
   background-color: var(--clr1bg);
   border-radius: 10px;
   padding: 0.4rem;
-  transition: transform 0.5s;
 }
 
 .book-list li:hover {

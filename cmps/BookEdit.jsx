@@ -120,16 +120,16 @@ export function BookEdit() {
           <select
             name="currencyCode"
             id="currencyCode"
-            value={bookToEdit.listPrice.currencyCode || ""}
-            onChange={({ target }) =>
+            value={bookToEdit.listPrice.currencyCode || "ILS"}
+            onChange={({ target }) => {
               setBookToEdit((prevBook) => ({
                 ...prevBook,
                 listPrice: {
                   ...prevBook.listPrice,
                   currencyCode: target.value,
                 },
-              }))
-            }
+              }));
+            }}
           >
             {currencyCodes.map((code) => (
               <option key={code} value={code}>

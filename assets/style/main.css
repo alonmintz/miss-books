@@ -11,9 +11,6 @@
 /* Pages */
 @import "pages/home-page.css";
 @import "pages/about.css";
-/* @import "pages/car-index.css";
-@import "pages/car-details.css";
-@import "pages/car-edit.css"; */
 
 /* Components */
 @import "cmps/app-header.css";
@@ -22,7 +19,6 @@
 @import "cmps/book-preview.css";
 @import "cmps/book-details.css";
 @import "cmps/book-edit.css";
-/* @import "cmps/car-filter.css";
-@import "cmps/car-list.css";
-@import "cmps/car-preview.css";
-@import "cmps/not-found.css";  */
+@import "cmps/book-filter.css";
+
+/*@import "cmps/not-found.css";  */

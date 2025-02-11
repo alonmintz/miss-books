@@ -1,4 +1,4 @@
-import { loadFromStorage, makeId, saveToStorage } from "./util.service.js";
+import { utilService } from "./util.service.js";
 import { storageService } from "./async-storage.service.js";
 import { demoBooks } from "../models/books.js";
 
@@ -68,8 +68,7 @@ function save(book) {
   if (book.id) {
     return storageService.put(STORAGE_KEY, book);
   }
-  //TODO: add function (populateNewBook()) that injects fields to a new book (like subtitle etc...)
-  return storageService.post(STORAGE_KEY, book);
+  return storageService.post(STORAGE_KEY, _populateNewBook(book));
 }
 
 function getEmptyBook(
@@ -77,7 +76,7 @@ function getEmptyBook(
   pageCount = 0,
   publishedDate = 0,
   amount = 0,
-  currencyCode = ""
+  currencyCode = "ILS"
 ) {
   return {
     title,
@@ -118,12 +117,39 @@ function _setNextPrevId(book) {
 }
 
 function _createBooks() {
-  const books = loadFromStorage(STORAGE_KEY);
+  const books = utilService.loadFromStorage(STORAGE_KEY);
   if (!books || !books.length) {
-    saveToStorage(STORAGE_KEY, demoBooks);
+    utilService.saveToStorage(STORAGE_KEY, demoBooks);
   }
 }
 
-function _populateNewBook(book) {}
+function _populateNewBook(book) {
+  const additionalFields = {
+    subtitle: utilService.makeLorem(4),
+    authors: [utilService.makeLorem(2)],
+    description: utilService.makeLorem(20),
+    categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+    thumbnail: `http://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(
+      1,
+      10
+    )}.jpg`,
+    language: "en",
+    listPrice: {
+      isOnSale: Math.random() > 0.7,
+    },
+  };
+
+  book = {
+    ...book,
+    ...additionalFields,
+    listPrice: {
+      ...book.listPrice,
+      ...additionalFields.listPrice,
+    },
+  };
+  console.log("new book:", book);
+
+  return book;
+}
 
 function _createBook() {}

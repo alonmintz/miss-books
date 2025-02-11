@@ -3,21 +3,16 @@ import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
 
 const { useState, useEffect } = React;
-const { Link, Outlet, useLocation } = ReactRouterDOM;
+const { Link, Outlet, useNavigate } = ReactRouterDOM;
 
 export function BookIndex() {
   const [books, setBooks] = useState(null);
   const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
-
-  //   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBooks();
   }, [filterBy]);
-
-  //   useEffect(() => {
-  //     loadBooks();
-  //   }, [location]);
 
   function loadBooks() {
     bookService
@@ -45,7 +40,8 @@ export function BookIndex() {
   return (
     <section className="book-index flex flex-column">
       <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-      <Link to="/book/edit"> ADD </Link>
+      <button onClick={() => navigate("/book/edit")}>Add Book</button>
+      {/* <Link to="/book/edit"> ADD </Link> */}
       <Outlet />
       {books.length === 0 ? (
         <h1>Sorry but none of the books match...</h1>
