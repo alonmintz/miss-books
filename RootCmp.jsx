@@ -26,6 +26,7 @@ export function App() {
           </Routes>
         </main>
         //TODO: add footer
+        //TODO: add user-message
       </section>
     </Router>
   );

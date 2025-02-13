@@ -1,5 +1,6 @@
 import { bookService } from "../services/book.service.js";
 import { LongTxt } from "./LongTxt.jsx";
+import { ReviewList } from "./ReviewList.jsx";
 
 const { useState, useEffect } = React;
 const { useNavigate, useParams, Link } = ReactRouterDOM;
@@ -32,6 +33,11 @@ export function BookDetails() {
     ev.stopPropagation();
   }
 
+  //TODO: make sure new review is rendered
+  //   function onSetReviews(reviews) {
+  //     setBook((prevBook) => ({ ...prevBook, reviews }));
+  //   }
+
   if (!book)
     return (
       <section className="modal-backdrop" onClick={onClose}>
@@ -40,6 +46,8 @@ export function BookDetails() {
         </section>
       </section>
     );
+  console.log({ book });
+  console.log("reviews:", book.reviews);
 
   const getAuthors = () => {
     // if (!book) return;
@@ -74,6 +82,13 @@ export function BookDetails() {
     }
     return "";
   };
+
+  function onSetReviews(review) {
+    console.log("here");
+    console.log({ review });
+
+    bookService.addReview(params.bookId, review).then(setBook);
+  }
   return (
     <section className="modal-backdrop" onClick={onClose}>
       <section className="book-details modal-content" onClick={evStop}>
@@ -108,6 +123,7 @@ export function BookDetails() {
           {book.description && (
             <LongTxt txt={book.description} className="grid-detail book-desc" />
           )}
+          <ReviewList reviews={book.reviews} onSetReviews={onSetReviews} />
         </section>
         <Link to={`/book/${book.prevBookId}`} className="link-btn prev-btn">
           <i className="fa fa-arrow-left"></i>

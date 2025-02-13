@@ -11,6 +11,8 @@ export const bookService = {
   getDefaultFilter,
   getFilterFromSearchParams,
   getCurrencyCodes,
+  getEmptyReview,
+  addReview,
 };
 
 const STORAGE_KEY = "bookDB";
@@ -119,6 +121,32 @@ function getFilterFromSearchParams(searchParams) {
 
 function getCurrencyCodes() {
   return currencyCodes;
+}
+
+function getEmptyReview(type) {
+  return {
+    type,
+    fullname: "",
+    rating: null,
+    readAt: null,
+  };
+}
+
+function addReview(bookId, review) {
+  console.log({ review });
+  console.log("review typeof=", typeof review);
+
+  review = { ...review, id: utilService.makeId() };
+  return get(bookId)
+    .then((book) => ({
+      ...book,
+      reviews: [...(book.reviews || []), review],
+      // reviews: [...book.reviews, review],
+    }))
+    .then(save)
+    .catch((err) => {
+      console.log("Error adding Review: ", err);
+    });
 }
 
 function _setNextPrevId(book) {
