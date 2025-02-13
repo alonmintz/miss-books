@@ -1,4 +1,5 @@
 .book-preview {
+  position: relative;
   text-align: center;
   padding: 0.5em;
   display: flex;
@@ -13,4 +14,12 @@
 
 .book-preview img {
   max-width: 100px;
+}
+
+.book-preview .sale-img {
+  position: absolute;
+  top: -10px;
+  height: 50px;
+  width: 50px;
+  transform: rotate(-30deg);
 }

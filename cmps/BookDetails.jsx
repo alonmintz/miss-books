@@ -1,7 +1,8 @@
 import { bookService } from "../services/book.service.js";
+import { LongTxt } from "./LongTxt.jsx";
 
 const { useState, useEffect } = React;
-const { useNavigate, useParams } = ReactRouterDOM;
+const { useNavigate, useParams, Link } = ReactRouterDOM;
 
 export function BookDetails() {
   const navigate = useNavigate();
@@ -31,16 +32,6 @@ export function BookDetails() {
     ev.stopPropagation();
   }
 
-  const getAuthors = () => {
-    if (!book) return;
-    return book.authors.join(", ");
-  };
-
-  const getCategories = () => {
-    if (!book) return;
-    return book.categories.join(", ");
-  };
-
   if (!book)
     return (
       <section className="modal-backdrop" onClick={onClose}>
@@ -49,41 +40,81 @@ export function BookDetails() {
         </section>
       </section>
     );
+
+  const getAuthors = () => {
+    // if (!book) return;
+    return book.authors.join(", ");
+  };
+
+  const getCategories = () => {
+    // if (!book) return;
+    return book.categories.join(", ");
+  };
+
+  const getReadingLevel = () => {
+    if (book.pageCount > 500) {
+      return "Serious Reading";
+    } else if (book.pageCount > 200) {
+      return "Descent Reading";
+    } else if (book.pageCount < 100) {
+      return "Light Reading";
+    }
+  };
+
+  const getIsVintage = () => {
+    const currentYear = new Date().getFullYear();
+    return currentYear - book.publishedDate > 10 ? "Vintage" : "New";
+  };
+
+  const getPriceClass = () => {
+    if (book.listPrice.amount > 150) {
+      return "expensive";
+    } else if (book.listPrice.amount < 20) {
+      return "cheap";
+    }
+    return "";
+  };
   return (
     <section className="modal-backdrop" onClick={onClose}>
       <section className="book-details modal-content" onClick={evStop}>
-        <button className="close-btn" onClick={onClose}>
+        <Link to="/book" className="link-btn close-btn">
           X
-        </button>
+        </Link>
         <h1>{`${book.title} - ${getAuthors()}`}</h1>
         <h4>{book.subtitle}</h4>
         <section className="details">
-          <img src={book.thumbnail} alt="" />
-          <h4 className="grid-detail price">
-            Price: {book.listPrice.amount} {book.listPrice.currencyCode}
-          </h4>
+          <img className="book-img" src={book.thumbnail} alt="" />
+          <section className="grid-detail price">
+            {book.listPrice.isOnSale && (
+              <img className="sale-img" src="assets/img/on-sale.png" />
+            )}
+            <h4>
+              Price:{" "}
+              <span className={getPriceClass()}>
+                {book.listPrice.amount} {book.listPrice.currencyCode}
+              </span>
+            </h4>
+          </section>
           <h4 className="grid-detail lng">Language: {book.language}</h4>
           <h4 className="grid-detail ctgs">Categories: {getCategories()}</h4>
           <h4 className="grid-detail year">
-            Publish Year: {book.publishedDate}
+            Publish Year: {book.publishedDate}{" "}
+            <span className="additional">{`(${getIsVintage()})`}</span>
           </h4>
           <h4 className="grid-detail page-count">
-            Page Count: {book.pageCount}
+            Page Count: {book.pageCount}{" "}
+            <span className="additional">{`(${getReadingLevel()})`}</span>
           </h4>
+          {book.description && (
+            <LongTxt txt={book.description} className="grid-detail book-desc" />
+          )}
         </section>
-        <p className="book-desc">{book.description}</p>
-        <button
-          className="prev-btn"
-          onClick={() => navigate(`/book/${book.prevBookId}`)}
-        >
+        <Link to={`/book/${book.prevBookId}`} className="link-btn prev-btn">
           <i className="fa fa-arrow-left"></i>
-        </button>
-        <button
-          className="next-btn"
-          onClick={() => navigate(`/book/${book.nextBookId}`)}
-        >
+        </Link>
+        <Link to={`/book/${book.nextBookId}`} className="link-btn next-btn">
           <i className="fa fa-arrow-right"></i>
-        </button>
+        </Link>
       </section>
     </section>
   );

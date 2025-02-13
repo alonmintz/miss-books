@@ -1,12 +1,16 @@
 import { bookService } from "../services/book.service.js";
+import { utilService } from "../services/util.service.js";
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 export function BookFilter({ filterBy, onSetFilterBy }) {
   const [filterByToEdit, setFilterByToEdit] = useState(filterBy);
+  const onSetFilterByDebounce = useRef(
+    utilService.debounce(onSetFilterBy, 500)
+  ).current;
 
   useEffect(() => {
-    onSetFilterBy(filterByToEdit);
+    onSetFilterByDebounce(filterByToEdit);
   }, [filterByToEdit]);
 
   function handleChange({ target }) {
@@ -39,18 +43,19 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
               id="title"
               name="title"
               type="text"
+              value={filterByToEdit.title || ""}
               onChange={handleChange}
             />
           </section>
           <section className="filter-item filter-pages">
             <label htmlFor="pageCount">Minimum Pages: </label>
-            <span>{filterByToEdit.pageCount || 10}</span>
+            <span>{filterByToEdit.pageCount || ""}</span>
             <input
               id="pageCount"
               name="pageCount"
               type="range"
-              value={filterByToEdit.pageCount || 10}
-              min={10}
+              value={filterByToEdit.pageCount || 0}
+              min={0}
               max={1000}
               onChange={handleChange}
             />
@@ -70,13 +75,13 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
         <section className="filter-group">
           <section className="filter-item filter-price">
             <label htmlFor="amount">Minimum Price: </label>
-            <span>{filterByToEdit.amount || 0}</span>
+            <span>{filterByToEdit.amount || ""}</span>
             <input
               id="amount"
               name="amount"
               type="range"
               value={filterByToEdit.amount || 0}
-              min={10}
+              min={0}
               max={500}
               onChange={handleChange}
             />
@@ -86,6 +91,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
             <select
               name="currencyCode"
               id="currencyCode"
+              value={filterByToEdit.currencyCode || ""}
               onChange={handleChange}
             >
               <option defaultValue="" value="">

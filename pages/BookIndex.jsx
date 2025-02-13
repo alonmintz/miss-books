@@ -1,16 +1,20 @@
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
+import { utilService } from "../services/util.service.js";
 
 const { useState, useEffect } = React;
-const { Link, Outlet, useNavigate } = ReactRouterDOM;
+const { Link, Outlet, useSearchParams } = ReactRouterDOM;
 
 export function BookIndex() {
   const [books, setBooks] = useState(null);
-  const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filterBy, setFilterBy] = useState(
+    bookService.getFilterFromSearchParams(searchParams)
+  );
 
   useEffect(() => {
+    setSearchParams(utilService.getTruthyValues(filterBy));
     loadBooks();
   }, [filterBy]);
 
@@ -40,8 +44,9 @@ export function BookIndex() {
   return (
     <section className="book-index flex flex-column">
       <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-      <button onClick={() => navigate("/book/edit")}>Add Book</button>
-      {/* <Link to="/book/edit"> ADD </Link> */}
+      <Link to="/book/edit" className="link-btn add-btn">
+        ADD
+      </Link>
       <Outlet />
       {books.length === 0 ? (
         <h1>Sorry but none of the books match...</h1>

@@ -27,23 +27,18 @@
   z-index: 3;
   overflow: auto;
 
-  p {
-    text-align: center;
-    margin-top: 1.5em;
-  }
-
   h1 {
     font-size: 2rem;
     text-transform: capitalize;
   }
 }
-
+/*TODO: adjust CSS*/
 .close-btn {
   position: absolute;
   top: 5px;
   right: 5px;
   background-color: transparent;
-  color: black;
+  color: rgba(0, 0, 0, 0.6);
   border: none;
   z-index: 5;
 }

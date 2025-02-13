@@ -1,18 +1,19 @@
 .details {
+  position: relative;
   width: 90%;
   /* height: 50%; */
   height: auto;
   max-height: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   padding: 10px;
   margin-block-end: 2em;
 }
 
-.details img {
+.details .book-img {
   grid-column: 1/2;
-  grid-row: 1/-1;
+  grid-row: 1/6;
   display: block;
   margin: auto;
   max-width: 100%;
@@ -20,6 +21,16 @@
   height: auto;
   object-fit: contain;
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
+}
+
+.details .sale-img {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 50px;
+  width: 50px;
+  transform: rotate(-30deg);
+  z-index: 1;
 }
 
 .grid-detail {
@@ -30,6 +41,7 @@
 .price {
   grid-column: 2/3;
   grid-row: 1/2;
+  position: relative;
 }
 
 .lng {
@@ -47,12 +59,29 @@
   grid-row: 4/5;
 }
 
+.page-count {
+  grid-column: 2/3;
+  grid-row: 5/6;
+}
+
+.book-desc {
+  grid-column: 1/-1;
+  grid-row: 6/-1;
+  border: solid rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
+  justify-self: center;
+  margin: auto;
+  margin-block: 0.5em;
+}
+
+/*TODO: adjust CSS*/
 .next-btn {
   position: absolute;
   top: 50%;
   right: 5px;
   background-color: transparent;
-  color: black;
+  color: rgba(0, 0, 0, 0.6);
   border: none;
   z-index: 5;
 }
@@ -62,7 +91,25 @@
   top: 50%;
   left: 5px;
   background-color: transparent;
-  color: black;
+  color: rgba(0, 0, 0, 0.6);
   border: none;
   z-index: 5;
+}
+
+.book-details p {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+.additional {
+  font-weight: lighter;
+  font-size: 0.8em;
+}
+
+.expensive {
+  color: red;
+}
+
+.cheap {
+  color: green;
 }

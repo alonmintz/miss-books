@@ -9,6 +9,7 @@ export const bookService = {
   save,
   getEmptyBook,
   getDefaultFilter,
+  getFilterFromSearchParams,
   getCurrencyCodes,
 };
 
@@ -76,7 +77,8 @@ function getEmptyBook(
   pageCount = 0,
   publishedDate = 0,
   amount = 0,
-  currencyCode = "ILS"
+  currencyCode = "ILS",
+  isOnSale = false
 ) {
   return {
     title,
@@ -85,6 +87,7 @@ function getEmptyBook(
     listPrice: {
       amount,
       currencyCode,
+      isOnSale,
     },
   };
 }
@@ -96,6 +99,21 @@ function getDefaultFilter() {
     publishedDate: 0,
     amount: 0,
     currencyCode: "",
+  };
+}
+
+function getFilterFromSearchParams(searchParams) {
+  const title = searchParams.get("title") || "";
+  const pageCount = searchParams.get("pageCount") || "";
+  const publishedDate = searchParams.get("publishedDate") || "";
+  const amount = searchParams.get("amount") || "";
+  const currencyCode = searchParams.get("currencyCode") || "";
+  return {
+    title,
+    pageCount,
+    publishedDate,
+    amount,
+    currencyCode,
   };
 }
 
@@ -134,9 +152,6 @@ function _populateNewBook(book) {
       10
     )}.jpg`,
     language: "en",
-    listPrice: {
-      isOnSale: Math.random() > 0.7,
-    },
   };
 
   book = {
@@ -144,7 +159,6 @@ function _populateNewBook(book) {
     ...additionalFields,
     listPrice: {
       ...book.listPrice,
-      ...additionalFields.listPrice,
     },
   };
   console.log("new book:", book);

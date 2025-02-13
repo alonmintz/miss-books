@@ -53,7 +53,27 @@ export function BookEdit() {
     setBookToEdit((prevBook) => ({ ...prevBook, [field]: value }));
   }
 
-  //TODO: why the book updates/added only after refresh? how do i re-render the list?
+  function handleChangeListPrice({ target }) {
+    const { type, name: field } = target;
+    let { value } = target;
+
+    switch (type) {
+      case "range":
+      case "number":
+        value = +value;
+        break;
+
+      case "checkbox":
+        value = target.checked;
+        break;
+    }
+
+    setBookToEdit((prevBook) => ({
+      ...prevBook,
+      listPrice: { ...prevBook.listPrice, [field]: value },
+    }));
+  }
+
   function onSaveBook(ev) {
     ev.preventDefault();
     bookService
@@ -92,6 +112,7 @@ export function BookEdit() {
             name="pageCount"
             type="number"
             value={bookToEdit.pageCount || ""}
+            min={0}
             onChange={handleChange}
           />
           <label htmlFor="publishedDate">Publish Year: </label>
@@ -100,6 +121,7 @@ export function BookEdit() {
             name="publishedDate"
             type="number"
             value={bookToEdit.publishedDate || ""}
+            min={0}
             onChange={handleChange}
           />
           <label htmlFor="amount">Price: </label>
@@ -109,27 +131,14 @@ export function BookEdit() {
             type="number"
             value={bookToEdit.listPrice.amount || ""}
             min={0}
-            onChange={({ target }) =>
-              setBookToEdit((prevBook) => ({
-                ...prevBook,
-                listPrice: { ...prevBook.listPrice, amount: +target.value },
-              }))
-            }
+            onChange={handleChangeListPrice}
           />
           <label htmlFor="currencyCode">Currency: </label>
           <select
             name="currencyCode"
             id="currencyCode"
             value={bookToEdit.listPrice.currencyCode || "ILS"}
-            onChange={({ target }) => {
-              setBookToEdit((prevBook) => ({
-                ...prevBook,
-                listPrice: {
-                  ...prevBook.listPrice,
-                  currencyCode: target.value,
-                },
-              }));
-            }}
+            onChange={handleChangeListPrice}
           >
             {currencyCodes.map((code) => (
               <option key={code} value={code}>
@@ -137,6 +146,14 @@ export function BookEdit() {
               </option>
             ))}
           </select>
+          <label htmlFor="isOnSale">On Sale: </label>
+          <input
+            onChange={handleChangeListPrice}
+            checked={bookToEdit.listPrice.isOnSale}
+            id="isOnSale"
+            type="checkbox"
+            name="isOnSale"
+          />
           <button>Save</button>
         </form>
       </section>
