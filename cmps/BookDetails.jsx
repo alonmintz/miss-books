@@ -78,11 +78,18 @@ export function BookDetails() {
     bookService
       .addReview(params.bookId, review)
       .then(setBook)
-      .then((book) => setReviews(book.reviews));
+      .catch((err) => {
+        console.log(`Error adding review`, err);
+      });
   }
 
   function onRemoveReview(reviewId) {
-    bookService.removeReview(book, reviewId).then(setBook);
+    bookService
+      .removeReview(book, reviewId)
+      .then(setBook)
+      .catch((err) => {
+        console.log(`Error removing review`, err);
+      });
   }
 
   return (

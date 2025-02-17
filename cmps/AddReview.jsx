@@ -2,7 +2,7 @@ import { RateBySelect } from "./RateBySelect.jsx";
 import { RateByStars } from "./RateByStars.jsx";
 import { RateByTextbox } from "./RateByTextBox.jsx";
 
-const { useState, useEffect } = React;
+const { useState } = React;
 
 export function AddReview({ onAddReview }) {
   const [isAddOpen, setIsAddOpen] = useState(false);

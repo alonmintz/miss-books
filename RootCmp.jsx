@@ -1,3 +1,4 @@
+import { BookAdd } from "./cmps/BookAdd.jsx";
 import { BookDetails } from "./cmps/BookDetails.jsx";
 import { BookEdit } from "./cmps/BookEdit.jsx";
 import { AppHeader } from "./cmps/layout/AppHeader.jsx";
@@ -22,11 +23,11 @@ export function App() {
             </Route>
             <Route path="/book/edit" element={<BookEdit />} />
             <Route path="/book/edit/:bookId" element={<BookEdit />} />
+            <Route path="/book/add" element={<BookAdd />} />
             <Route path="/about" element={<AboutUs />} />
           </Routes>
         </main>
-        //TODO: add footer
-        //TODO: add user-message
+        //TODO: add footer //TODO: add user-message
       </section>
     </Router>
   );

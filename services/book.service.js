@@ -1,6 +1,8 @@
 import { utilService } from "./util.service.js";
 import { storageService } from "./async-storage.service.js";
 import { demoBooks } from "../models/books.js";
+// import axios from "axios";
+// const axios = require("axios");
 
 export const bookService = {
   query,
@@ -14,14 +16,18 @@ export const bookService = {
   getEmptyReview,
   addReview,
   removeReview,
+  getGoogleBooks,
+  saveGoogleBook,
 };
 
 const STORAGE_KEY = "bookDB";
+const GOOGLE_CACHE_KEY = "GBCache";
 
 const ctgs = ["Love", "Fiction", "Poetry", "Computers", "Religion"];
 const currencyCodes = ["ILS", "USD", "EUR"];
 
 let gFilterBy = {};
+let gGoogleCache = {};
 
 _createBooks();
 
@@ -73,6 +79,63 @@ function save(book) {
     return storageService.put(STORAGE_KEY, book);
   }
   return storageService.post(STORAGE_KEY, _populateNewBook(book));
+}
+
+function saveGoogleBook(book) {
+  const storageBooks = utilService.loadFromStorage(STORAGE_KEY);
+  const isPresent = storageBooks.some(
+    (storageBook) => storageBook.id === book.id
+  );
+
+  if (!isPresent) {
+    return storageService.post(STORAGE_KEY, book, true);
+  }
+
+  return Promise.reject(`book id ${book.id} already exists in storage`);
+}
+
+function getGoogleBooks(bookName) {
+  if (bookName === "") return Promise.resolve();
+  const cachedGoogleBooks = gGoogleCache[bookName];
+  if (cachedGoogleBooks) {
+    console.log("data from storage...", cachedGoogleBooks);
+    return Promise.resolve(cachedGoogleBooks);
+  }
+
+  const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${bookName}`;
+  return axios.get(url).then((res) => {
+    const data = res.data.items;
+    console.log("data from network...", data);
+    const books = _formatGoogleBooks(data);
+    gGoogleCache[bookName] = books;
+    utilService.saveToStorage(GOOGLE_CACHE_KEY, gGoogleCache);
+    return books;
+  });
+}
+
+function _formatGoogleBooks(googleBooks) {
+  return googleBooks.map((googleBook) => {
+    const { volumeInfo } = googleBook;
+    const book = {
+      id: googleBook.id,
+      title: volumeInfo.title,
+      description: volumeInfo.description,
+      pageCount: volumeInfo.pageCount,
+      authors: volumeInfo.authors,
+      categories: volumeInfo.categories,
+      publishedDate: volumeInfo.publishedDate,
+      language: volumeInfo.language,
+      listPrice: {
+        amount: utilService.getRandomIntInclusive(80, 500),
+        currencyCode:
+          currencyCodes[Math.floor(Math.random() * currencyCodes.length)],
+        isOnSale: Math.random() > 0.7,
+      },
+      reviews: [],
+    };
+    if (volumeInfo.imageLinks) book.thumbnail = volumeInfo.imageLinks.thumbnail;
+    return book;
+  });
 }
 
 function getEmptyBook(
@@ -134,10 +197,8 @@ function getEmptyReview(type) {
 }
 
 function addReview(bookId, review) {
-  console.log({ review });
-  console.log("review typeof=", typeof review);
-
   review = { ...review, id: utilService.makeId() };
+
   return get(bookId)
     .then((book) => ({
       ...book,
