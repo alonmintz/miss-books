@@ -1,7 +1,7 @@
 import { bookService } from "../services/book.service.js";
 const { useState } = React;
 
-export function RateBySelect({ onAddReview }) {
+export function RateBySelect({ onAddReview, onClose }) {
   const [review, setReview] = useState(bookService.getEmptyReview("select"));
   const [error, setError] = useState("");
 
@@ -30,12 +30,30 @@ export function RateBySelect({ onAddReview }) {
       setError("Please select a rating.");
       return;
     }
-    console.log({ review });
     onAddReview(review);
+    onClose();
   }
+
   return (
     <section className="rate-by-select">
       <form onSubmit={onSubmitReview}>
+        <label htmlFor="rate-fullname">Full Name: </label>
+        <input
+          type="text"
+          name="fullname"
+          id="rate-fullname"
+          value={review.fullname || ""}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="rate-fullname">Read At: </label>
+        <input
+          type="date"
+          name="readAt"
+          id="rate-read-at"
+          onChange={handleChange}
+          required
+        />
         <select
           name="rating"
           id="rate-select"
@@ -43,11 +61,13 @@ export function RateBySelect({ onAddReview }) {
           onChange={handleChange}
         >
           <option value="">Select rating</option>
-          <option value="good">good</option>
-          <option value="bad">bad</option>
+          <option value="excellent">Excellent</option>
+          <option value="good">Good</option>
+          <option value="meh">Meh</option>
+          <option value="bad">Bad</option>
         </select>
         <button>submit</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style={{ color: "red", fontSize: "1rem" }}>{error}</p>}
       </form>
     </section>
   );

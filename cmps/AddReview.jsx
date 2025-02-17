@@ -12,6 +12,10 @@ export function AddReview({ onAddReview }) {
     setSelectedRateType(target.value);
   };
 
+  function onCloseReview() {
+    setIsAddOpen(false);
+  }
+
   return (
     <section className="add-review">
       <button onClick={() => setIsAddOpen(true)}>Add Review</button>
@@ -46,7 +50,11 @@ export function AddReview({ onAddReview }) {
             />
             <label htmlFor="byStars">byStars</label>
           </section>
-          <DynamicRate rateType={selectedRateType} onAddReview={onAddReview} />
+          <DynamicRate
+            rateType={selectedRateType}
+            onAddReview={onAddReview}
+            onClose={onCloseReview}
+          />
         </section>
       )}
     </section>

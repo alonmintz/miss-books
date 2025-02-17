@@ -24,8 +24,6 @@ export function BookEdit() {
         navigate("/book");
       })
       .finally(() => {
-        console.log(bookToEdit);
-
         setIsLoading(false);
       });
   }

@@ -13,6 +13,7 @@ export const bookService = {
   getCurrencyCodes,
   getEmptyReview,
   addReview,
+  removeReview,
 };
 
 const STORAGE_KEY = "bookDB";
@@ -141,12 +142,20 @@ function addReview(bookId, review) {
     .then((book) => ({
       ...book,
       reviews: [...(book.reviews || []), review],
-      // reviews: [...book.reviews, review],
     }))
     .then(save)
     .catch((err) => {
       console.log("Error adding Review: ", err);
     });
+}
+
+function removeReview(book, reviewId) {
+  const reviewsToUpdate = book.reviews.filter(
+    (review) => review.id !== reviewId
+  );
+  const bookToUpdate = { ...book, reviews: [...reviewsToUpdate] };
+
+  return save(bookToUpdate);
 }
 
 function _setNextPrevId(book) {
