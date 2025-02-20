@@ -1,0 +1,46 @@
+.add-review {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: #474e5d7a;
+  padding-top: 50px;
+}
+
+.add-review .review-modal {
+  position: relative;
+  margin: 5% auto 15% auto;
+  width: 30%;
+  text-align: center;
+  min-width: 400px;
+  padding: 33px;
+  background-color: var(--clr1bg-light);
+  color: var(--gray3);
+  border: solid var(--gray3);
+  border-radius: 10px;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-review .radio {
+  display: flex;
+  justify-content: center;
+  margin-block-end: 10px;
+  padding: 10px;
+}
+
+.rate-by-textbox textarea {
+  width: 200px;
+  height: 100px;
+  max-width: 300px;
+  max-height: 200px;
+}
+
+.review-form-item {
+  margin-block: 10px;
+}
+
+.review-star {
+  margin-inline: 5px;
+}

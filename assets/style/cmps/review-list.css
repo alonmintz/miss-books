@@ -1,0 +1,40 @@
+.review-list {
+  width: 100%;
+}
+
+.review-list ul {
+  padding: 0;
+  margin: 0;
+}
+
+.review-list li {
+  position: relative;
+  list-style: none;
+  width: 90%;
+  height: fit-content;
+  min-height: 100px;
+  padding: 10px;
+  margin: 10px;
+  border: solid var(--gray2);
+  border-radius: 10px;
+  background-color: var(--clr1bg-light);
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
+}
+
+.review-list li .remove-btn {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  border-radius: 100%;
+  border: none;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.review-list li .remove-btn:hover {
+  background-color: var(--clr2);
+}
+
+.review-list li h2 {
+  margin: 0;
+}

@@ -187,9 +187,9 @@ function getCurrencyCodes() {
   return currencyCodes;
 }
 
-function getEmptyReview(type) {
+function getEmptyReview() {
   return {
-    type,
+    type: "",
     fullname: "",
     rating: null,
     readAt: null,
@@ -202,7 +202,7 @@ function addReview(bookId, review) {
   return get(bookId)
     .then((book) => ({
       ...book,
-      reviews: [...(book.reviews || []), review],
+      reviews: [review, ...(book.reviews || [])],
     }))
     .then(save)
     .catch((err) => {

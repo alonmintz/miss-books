@@ -21,5 +21,6 @@
 @import "cmps/book-edit.css";
 @import "cmps/book-filter.css";
 @import "cmps/long-txt.css";
-
+@import "cmps/add-review.css";
+@import "cmps/review-list.css";
 /*@import "cmps/not-found.css";  */

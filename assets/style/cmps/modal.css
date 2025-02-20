@@ -33,10 +33,12 @@
   }
 }
 /*TODO: adjust CSS*/
-.close-btn {
+.modal-content .close-btn {
   position: absolute;
   top: 5px;
   right: 5px;
+  /* top: -7px;
+  right: -7px; */
   background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
   border: none;

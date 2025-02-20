@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js";
+import { AddReview } from "./AddReview.jsx";
 import { LongTxt } from "./LongTxt.jsx";
 import { ReviewList } from "./ReviewList.jsx";
 
@@ -9,6 +10,7 @@ export function BookDetails() {
   const navigate = useNavigate();
   const params = useParams();
   const [book, setBook] = useState(null);
+  const [isReviewModal, setIsReviewModal] = useState(false);
 
   useEffect(() => {
     console.log(params);
@@ -31,6 +33,10 @@ export function BookDetails() {
 
   function evStop(ev) {
     ev.stopPropagation();
+  }
+
+  function toggleIsReviewModalOpen() {
+    setIsReviewModal((prev) => !prev);
   }
 
   if (!book)
@@ -126,12 +132,22 @@ export function BookDetails() {
           {book.description && (
             <LongTxt txt={book.description} className="grid-detail book-desc" />
           )}
-          <ReviewList
-            reviews={book.reviews}
-            onSetReviews={onSetReviews}
-            onRemoveReview={onRemoveReview}
-          />
+
+          <section className="grid-detail reviews-section">
+            <button onClick={toggleIsReviewModalOpen}>Add Review</button>
+            {isReviewModal && (
+              <AddReview
+                onAddReview={onSetReviews}
+                toggleReview={toggleIsReviewModalOpen}
+              />
+            )}
+            <ReviewList
+              reviews={book.reviews}
+              onRemoveReview={onRemoveReview}
+            />
+          </section>
         </section>
+
         <Link to={`/book/${book.prevBookId}`} className="link-btn prev-btn">
           <i className="fa fa-arrow-left"></i>
         </Link>
