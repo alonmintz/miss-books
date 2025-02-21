@@ -13,7 +13,6 @@ export function BookDetails() {
   const [isReviewModal, setIsReviewModal] = useState(false);
 
   useEffect(() => {
-    console.log(params);
     loadBook();
   }, [params.bookId]);
 

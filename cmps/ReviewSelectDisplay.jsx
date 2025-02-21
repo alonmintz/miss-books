@@ -12,5 +12,5 @@ export function ReviewSelectDisplay({ rating }) {
     }
   }
 
-  return <React.Fragment>{renderRating()}</React.Fragment>;
+  return <section className="rate-display">{renderRating()}</section>;
 }

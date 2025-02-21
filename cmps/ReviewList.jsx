@@ -1,4 +1,3 @@
-// import { AddReview } from "./AddReview.jsx";
 import { ReviewDisplay } from "./ReviewDisplay.jsx";
 import { ReviewSelectDisplay } from "./ReviewSelectDisplay.jsx";
 import { ReviewStarsDisplay } from "./ReviewStarsDisplay.jsx";

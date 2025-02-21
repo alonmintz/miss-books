@@ -3,10 +3,10 @@ export function ReviewStarsDisplay({ rating }) {
     const stars = [];
     for (let counter = 0; counter < rating; counter++) {
       stars.push(
-        <i key={counter} className="fa fa-star" style={{ color: "yellow" }}></i>
+        <i key={counter} className="fa fa-star review-star yellow"></i>
       );
     }
     return stars;
   }
-  return <React.Fragment>{renderStars()}</React.Fragment>;
+  return <section className="rate-display">{renderStars()}</section>;
 }

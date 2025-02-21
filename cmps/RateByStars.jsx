@@ -21,20 +21,16 @@ export function RateByStars({ rateType, onChange, setType }) {
   }
 
   const stars = [1, 2, 3, 4, 5];
-  //TODO change to className handled by state
-  function setStarStyle(star) {
-    return {
-      //   color: (hovered || selected) >= star ? "yellow" : "lightgray",
-      color: (hovered || selected) >= star ? "#fafc72" : "var(--gray3)",
-    };
+
+  function setColorClass(star) {
+    return (hovered || selected) >= star ? "yellow" : "";
   }
   return (
     <section className="rate-by-stars">
       {stars.map((star) => (
         <i
           key={star}
-          className="fa fa-star review-star"
-          style={setStarStyle(star)}
+          className={`fa fa-star review-star ${setColorClass(star)}`}
           onMouseEnter={() => setHovered(star)}
           onMouseLeave={() => setHovered(0)}
           onClick={() => handleStarClick(star)}

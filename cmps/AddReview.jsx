@@ -82,9 +82,9 @@ export function AddReview({ onAddReview, toggleReview }) {
             type="radio"
             id="byTextbox"
             name="rateTypes"
-            value="textbox"
+            value="text"
             onChange={handleRadioChange}
-            checked={selectedRateType === "textbox"}
+            checked={selectedRateType === "text"}
           />
           <label htmlFor="byTextbox">Text</label>
         </section>
@@ -104,7 +104,7 @@ export function AddReview({ onAddReview, toggleReview }) {
 function DynamicReview(props) {
   const rateTypeMap = {
     select: <RateBySelect {...props} />,
-    textbox: <RateByTextbox {...props} />,
+    text: <RateByTextbox {...props} />,
     stars: <RateByStars {...props} />,
   };
   return (

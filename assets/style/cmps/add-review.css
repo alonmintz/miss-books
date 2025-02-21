@@ -43,4 +43,9 @@
 
 .review-star {
   margin-inline: 5px;
+  color: var(--gray3);
+}
+
+.review-star.yellow {
+  color: #fafc72;
 }

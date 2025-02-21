@@ -38,3 +38,16 @@
 .review-list li h2 {
   margin: 0;
 }
+
+.rate-display {
+  text-align: center;
+}
+
+.long-txt.text-review p {
+  font-size: 0.75em;
+  text-align: start;
+}
+
+.long-txt.text-review .show-txt-btn {
+  font-size: 0.66em;
+}
