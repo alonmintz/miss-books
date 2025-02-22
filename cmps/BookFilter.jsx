@@ -42,7 +42,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
       <fieldset>
         <legend>
           <h4>
-            <i class="fas fa-filter"></i> Filter
+            <i className="fas fa-filter"></i> Filter
           </h4>
         </legend>
         <section className="filter-group">

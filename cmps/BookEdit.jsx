@@ -23,10 +23,10 @@ export function BookEdit() {
       .catch((err) => {
         console.log(`Error loading book Id ${bookId}`, err);
         showErrorMsg(`Error loading book Id ${bookId}`);
+        navigate("/book");
       })
       .finally(() => {
         setIsLoading(false);
-        navigate("/book");
       });
   }
 

@@ -1,8 +1,6 @@
 import { utilService } from "./util.service.js";
 import { storageService } from "./async-storage.service.js";
 import { demoBooks } from "../models/books.js";
-// import axios from "axios";
-// const axios = require("axios");
 
 export const bookService = {
   query,
@@ -27,7 +25,7 @@ const ctgs = ["Love", "Fiction", "Poetry", "Computers", "Religion"];
 const currencyCodes = ["ILS", "USD", "EUR"];
 
 let gFilterBy = {};
-let gGoogleCache = {};
+let gGoogleCache = utilService.loadFromStorage(GOOGLE_CACHE_KEY) || {};
 
 _createBooks();
 
@@ -96,10 +94,13 @@ function saveGoogleBook(book) {
 
 function getGoogleBooks(bookName) {
   if (bookName === "") return Promise.resolve();
-  const cachedGoogleBooks = gGoogleCache[bookName];
-  if (cachedGoogleBooks) {
-    console.log("data from storage...", cachedGoogleBooks);
-    return Promise.resolve(cachedGoogleBooks);
+
+  let { data: googleBooks, lastFetched = 0 } = gGoogleCache[bookName] || {};
+
+  const isCacheTimeRange = Date.now() - lastFetched < 60000;
+  if (googleBooks && isCacheTimeRange) {
+    console.log("data from storage...", googleBooks);
+    return Promise.resolve(googleBooks);
   }
 
   const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${bookName}`;
@@ -107,10 +108,17 @@ function getGoogleBooks(bookName) {
     const data = res.data.items;
     console.log("data from network...", data);
     const books = _formatGoogleBooks(data);
-    gGoogleCache[bookName] = books;
-    utilService.saveToStorage(GOOGLE_CACHE_KEY, gGoogleCache);
+    _saveDataToCache(bookName, books);
     return books;
   });
+}
+
+function _saveDataToCache(key, data) {
+  gCache[key] = {
+    data,
+    lastFetched: Date.now(),
+  };
+  utilService.saveToStorage(GOOGLE_CACHE_KEY, gGoogleCache);
 }
 
 function _formatGoogleBooks(googleBooks) {
