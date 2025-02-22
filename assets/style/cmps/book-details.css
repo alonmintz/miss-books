@@ -1,8 +1,6 @@
 .book-details .details {
   position: relative;
   width: 90%;
-  /* height: 25%; */
-  /* height: auto; */
   max-height: 75%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -96,25 +94,41 @@
   margin-block: 0.5em;
 }
 
-/*TODO: adjust CSS*/
 .next-btn {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  right: 5px;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.6);
-  border: none;
+  right: 10px;
+  color: var(--gray3);
+  border: solid var(--gray2);
+  border-radius: 100%;
   z-index: 5;
 }
 
 .prev-btn {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  left: 5px;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.6);
-  border: none;
+  left: 10px;
+  color: var(--gray3);
+  border: solid var(--gray2);
+  border-radius: 100%;
   z-index: 5;
+}
+
+.book-details .close-btn {
+  position: fixed;
+  background-color: var(--clr2bg);
+  color: var(--gray3);
+  border: solid var(--gray2);
+  border-radius: 100%;
+  font-size: 0.5em;
+  right: 50%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.book-details .close-btn:hover {
+  background-color: var(--clr2);
+  color: white;
+  transition: 0.3s;
 }
 
 .book-details p {

@@ -7,9 +7,10 @@
   align-items: center;
 }
 
-.book-preview h1 {
+.book-preview h1,
+h6 {
   text-transform: capitalize;
-  color: black;
+  color: var(--gray1);
 }
 
 .book-preview img {

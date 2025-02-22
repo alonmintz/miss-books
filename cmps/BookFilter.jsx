@@ -29,12 +29,21 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
   }
 
   const currencyCodes = bookService.getCurrencyCodes();
+  const emptyFilter = bookService.getDefaultFilter();
 
   return (
     <section className="book-filter">
+      <button
+        className="reset-btn"
+        onClick={() => setFilterByToEdit(emptyFilter)}
+      >
+        Reset
+      </button>
       <fieldset>
         <legend>
-          <h4>Filter</h4>
+          <h4>
+            <i class="fas fa-filter"></i> Filter
+          </h4>
         </legend>
         <section className="filter-group">
           <section className="filter-item filter-title">

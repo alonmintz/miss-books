@@ -1,11 +1,12 @@
 .book-filter {
+  position: relative;
   font-family: "Edu VIC WA NT Beginner", cursive;
   font-size: 0.7em;
   height: auto;
   padding: 20px;
   margin-block-start: 10px;
   background-color: var(--clr2bg-light);
-  border: 1px solid var(--clr1);
+  border: solid var(--gray2);
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -18,7 +19,8 @@ fieldset {
   padding: 0;
   flex-grow: 1;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  /* flex-direction: column; */
   option {
     font-family: "Edu VIC WA NT Beginner", cursive;
   }
@@ -28,12 +30,16 @@ legend {
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .filter-group {
   margin-bottom: 15px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter-item {
@@ -43,4 +49,11 @@ legend {
 
 .filter-item:last-child {
   margin-right: 0;
+}
+
+.book-filter .reset-btn {
+  position: absolute;
+  border: solid var(--gray2);
+  bottom: 0;
+  right: 0;
 }

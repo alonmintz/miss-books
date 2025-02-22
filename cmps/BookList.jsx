@@ -8,16 +8,18 @@ export function BookList({ books, onRemoveBook }) {
     <ul className="book-list">
       {books.map((book) => (
         <li key={book.id}>
-          <section className="top-btns">
-            <Link to={`/book/edit/${book.id}`} className="link-btn edit-btn">
-              Edit
-            </Link>
-            <button onClick={() => onRemoveBook(book.id)}>delete</button>
-          </section>
+          <button className="remove-btn" onClick={() => onRemoveBook(book.id)}>
+            <i className="fa fa-trash"></i>
+          </button>
           <BookPreview book={book} />
-          <Link to={`/book/${book.id}`} className="link-btn details-btn">
-            Details
-          </Link>
+          <section className="flex">
+            <Link to={`/book/${book.id}`} className="link-btn details-btn">
+              Details
+            </Link>
+            <Link to={`/book/edit/${book.id}`} className="link-btn edit-btn">
+              <i className="fa-solid fa-pen-to-square"></i>
+            </Link>
+          </section>
         </li>
       ))}
     </ul>

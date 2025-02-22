@@ -10,6 +10,7 @@ body {
   margin: 0;
   color: var(--gray3);
   font-size: 1.2rem;
+  background-color: var(--clr3bg-light);
 }
 
 h1,
@@ -52,7 +53,7 @@ object {
   cursor: pointer;
   background-color: var(--clr2bg);
   margin: 0.5em;
-  border: 1px solid var(--clr2);
+  border: solid var(--gray2);
   padding: 0.5em 0.8em;
   border-radius: 4px;
   font-family: "Edu VIC WA NT Beginner", cursive;

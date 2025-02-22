@@ -44,15 +44,17 @@ export function BookIndex() {
   return (
     <section className="book-index flex flex-column">
       <BookFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-      <Link to="/book/edit" className="link-btn add-btn">
-        Add Original Book
-      </Link>
-      <Link to="/book/add" className="link-btn add-btn">
-        Add Google Book
-      </Link>
+      <section className="flex justify-center">
+        <Link to="/book/edit" className="link-btn add-btn">
+          Add Original Book
+        </Link>
+        <Link to="/book/add" className="link-btn add-btn">
+          Add Google Book
+        </Link>
+      </section>
       <Outlet />
       {books.length === 0 ? (
-        <h1>Sorry but none of the books match...</h1>
+        <h1>Sorry, no books to show...</h1>
       ) : (
         <BookList books={books} onRemoveBook={removeBook} />
       )}

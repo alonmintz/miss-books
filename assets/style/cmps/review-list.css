@@ -21,20 +21,6 @@
   box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
 }
 
-.review-list li .remove-btn {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  border-radius: 100%;
-  border: none;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-}
-
-.review-list li .remove-btn:hover {
-  background-color: var(--clr2);
-}
-
 .review-list li h2 {
   margin: 0;
 }

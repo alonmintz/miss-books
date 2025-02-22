@@ -14,6 +14,7 @@
   justify-content: space-around;
   align-items: center;
   background-color: var(--clr1bg);
+  border: solid var(--gray2);
   border-radius: 10px;
   padding: 0.4rem;
 }
@@ -21,4 +22,22 @@
 .book-list li:hover {
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.01);
+}
+
+li .remove-btn {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  border: solid var(--gray2);
+  border-radius: 100%;
+  transition: background-color 0.3s ease;
+}
+
+li .remove-btn:hover {
+  background-color: var(--clr2);
+}
+
+.book-list li .link-btn {
+  font-size: 0.75em;
+  font-weight: 800;
 }
