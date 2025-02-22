@@ -1,8 +1,32 @@
-
 .about {
+  align-content: center;
+  font-size: 2rem;
 }
 
-.about  nav {
-    display: flex;
-    gap: 1em;
+.about nav {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  padding: 2em;
+  a {
+    font-weight: 800;
+    color: var(--gray3);
+    transition: color 0.5s ease;
+  }
+  a.active {
+    text-decoration: underline;
+    color: var(--clr1-light);
+  }
+}
+
+.about-team {
+  padding-inline: 10px;
+  a {
+    font-weight: 800;
+    color: var(--clr1);
+  }
+}
+
+.about-goal {
+  text-align: center;
 }

@@ -11,9 +11,11 @@
 /* Pages */
 @import "pages/home-page.css";
 @import "pages/about.css";
+@import "pages/book-index.css";
 
 /* Components */
 @import "cmps/app-header.css";
+@import "cmps/app-footer.css";
 @import "cmps/modal.css";
 @import "cmps/book-list.css";
 @import "cmps/book-preview.css";
@@ -23,4 +25,4 @@
 @import "cmps/long-txt.css";
 @import "cmps/add-review.css";
 @import "cmps/review-list.css";
-@import "cmps/user-msg.css"; /*@import "cmps/not-found.css";  */
+@import "cmps/user-msg.css";

@@ -1,6 +1,20 @@
 .home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .home-page img {
-  width: 100%;
+  height: 50vh;
+  width: 50vw;
+  min-width: 100px;
+  min-height: 100px;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.home-page a {
+  color: var(--clr1);
 }

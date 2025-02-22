@@ -1,7 +1,7 @@
 .book-filter {
   position: relative;
   font-family: "Edu VIC WA NT Beginner", cursive;
-  font-size: 0.7em;
+  font-size: 1em;
   height: auto;
   padding: 20px;
   margin-block-start: 10px;
@@ -45,6 +45,7 @@ legend {
 .filter-item {
   margin-right: 10px;
   flex: 1;
+  padding: 10px;
 }
 
 .filter-item:last-child {
@@ -53,6 +54,7 @@ legend {
 
 .book-filter .reset-btn {
   position: absolute;
+  font-weight: 800;
   border: solid var(--gray2);
   bottom: 0;
   right: 0;

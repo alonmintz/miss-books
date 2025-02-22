@@ -17,6 +17,7 @@
 
 .app-header .app-nav a {
   cursor: pointer;
+  transition: color 0.5s ease;
 }
 
 .app-header a.active {
