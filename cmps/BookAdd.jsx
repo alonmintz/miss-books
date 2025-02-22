@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 import { utilService } from "../services/util.service.js";
 
 const { useState, useEffect, useRef } = React;
@@ -14,6 +15,7 @@ export function BookAdd() {
       .then(setBooks)
       .catch((err) => {
         console.log("Error fetching books via google: ", err);
+        showErrorMsg("Error fetching books via google");
       });
   }
 
@@ -40,13 +42,14 @@ export function BookAdd() {
   }
 
   function onAddBook(book) {
-    console.log("book to add: ", book);
     bookService
       .saveGoogleBook(book)
-      .then(navigate("/book"))
+      .then(showSuccessMsg(`book ${book.id} successfully added`))
       .catch((err) => {
         console.log(err);
-      });
+        showErrorMsg("Error adding book");
+      })
+      .finally(navigate("/book"));
   }
 
   return (

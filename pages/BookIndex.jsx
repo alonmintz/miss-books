@@ -1,6 +1,7 @@
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { bookService } from "../services/book.service.js";
+import { showErrorMsg } from "../services/event-bus.service.js";
 import { utilService } from "../services/util.service.js";
 
 const { useState, useEffect } = React;
@@ -22,7 +23,10 @@ export function BookIndex() {
     bookService
       .query(filterBy)
       .then(setBooks)
-      .catch((err) => console.log("Error loading books: ", err));
+      .catch((err) => {
+        console.log("Error loading books: ", err);
+        showErrorMsg("Error loading books");
+      });
   }
 
   function removeBook(bookId) {
@@ -32,7 +36,8 @@ export function BookIndex() {
         setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
       })
       .catch((err) => {
-        console.log(`Error removing ${bookId}: `, err);
+        console.log(`Error removing book ${bookId}: `, err);
+        showErrorMsg(`Error removing book ${bookId}`);
       });
   }
 

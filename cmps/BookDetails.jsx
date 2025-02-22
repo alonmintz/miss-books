@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js";
+import { showErrorMsg } from "../services/event-bus.service.js";
 import { AddReview } from "./AddReview.jsx";
 import { LongTxt } from "./LongTxt.jsx";
 import { ReviewList } from "./ReviewList.jsx";
@@ -22,6 +23,7 @@ export function BookDetails() {
       .get(params.bookId)
       .then(setBook)
       .catch((err) => {
+        showErrorMsg(`Error loading book id: ${params.bookId}`);
         console.log(`Error loading book id: ${params.bookId}`, err);
       });
   }
@@ -85,6 +87,7 @@ export function BookDetails() {
       .then(setBook)
       .catch((err) => {
         console.log(`Error adding review`, err);
+        showErrorMsg(`Error adding review`);
       });
   }
 
@@ -94,6 +97,7 @@ export function BookDetails() {
       .then(setBook)
       .catch((err) => {
         console.log(`Error removing review`, err);
+        showErrorMsg(`Error removing review`);
       });
   }
 

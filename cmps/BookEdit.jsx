@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 const { useState, useEffect } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
@@ -21,10 +22,11 @@ export function BookEdit() {
       .then(setBookToEdit)
       .catch((err) => {
         console.log(`Error loading book Id ${bookId}`, err);
-        navigate("/book");
+        showErrorMsg(`Error loading book Id ${bookId}`);
       })
       .finally(() => {
         setIsLoading(false);
+        navigate("/book");
       });
   }
 
@@ -78,9 +80,11 @@ export function BookEdit() {
       .save(bookToEdit)
       .then((book) => {
         console.log(`Book ${book.id} was successfully Saved.`);
+        showSuccessMsg(`Book ${book.id} was successfully Saved`);
       })
       .catch((err) => {
         console.log("Error saving book: ", err);
+        showErrorMsg(`Error saving book`);
       })
       .finally(navigate("/book"));
   }
