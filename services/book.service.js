@@ -114,7 +114,7 @@ function getGoogleBooks(bookName) {
 }
 
 function _saveDataToCache(key, data) {
-  gCache[key] = {
+  gGoogleCache[key] = {
     data,
     lastFetched: Date.now(),
   };
