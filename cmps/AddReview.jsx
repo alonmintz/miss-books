@@ -1,6 +1,6 @@
 import { RateBySelect } from "./RateBySelect.jsx";
 import { RateByStars } from "./RateByStars.jsx";
-import { RateByTextbox } from "./RateByTextBox.jsx";
+import { RateByTextbox } from "./RateByTextbox.jsx";
 import { bookService } from "../services/book.service.js";
 import { ReviewGeneralDetails } from "./ReviewGeneralDetails.jsx";
 
