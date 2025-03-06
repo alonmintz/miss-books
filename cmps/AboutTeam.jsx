@@ -16,7 +16,7 @@ export function AboutTeam() {
         , where I share my projects and experiments. Additionally, feel free to
         connect with me on{" "}
         <a
-          href="www.linkedin.com/in/alon-mintz"
+          href="https://linkedin.com/in/alon-mintz"
           target="_blank"
           rel="noopener noreferrer"
         >
